@@ -1,5 +1,9 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
+<<<<<<< HEAD
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
+=======
+import { supabase } from '@/lib/supabase';
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
 
 export interface User {
   id: string;
@@ -89,8 +93,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const savedCompleted = localStorage.getItem('vm_completed');
     if (savedCompleted) setCompletedLessons(JSON.parse(savedCompleted));
 
+<<<<<<< HEAD
     if (!isSupabaseConfigured) return;
 
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
     // Restore Supabase session
     supabase.auth.getSession().then(({ data }) => {
       if (data.session?.user) {

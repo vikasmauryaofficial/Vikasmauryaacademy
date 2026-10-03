@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+<<<<<<< HEAD
 import {
   blogPosts as mockBlogPosts,
   courses as mockCourses,
@@ -24,6 +25,13 @@ export const supabase = createClient(
     },
   },
 );
+=======
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
 
 export type Channel = 'VMA' | 'VCS';
 export type Difficulty = 'Easy' | 'Medium' | 'Hard';
@@ -146,6 +154,7 @@ export interface YouTubeVideoItem {
   channel: Channel;
 }
 
+<<<<<<< HEAD
 const fallbackDate = new Date().toISOString();
 
 function mapMockCourse(course: (typeof mockCourses)[number]): DBCourse {
@@ -266,6 +275,11 @@ function mapMockYouTubeVideos() {
 
 export async function fetchCourses(): Promise<DBCourse[]> {
   if (!isSupabaseConfigured) return mockCourses.map(mapMockCourse);
+=======
+// Data fetching functions
+
+export async function fetchCourses(): Promise<DBCourse[]> {
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('courses')
     .select('*')
@@ -276,7 +290,10 @@ export async function fetchCourses(): Promise<DBCourse[]> {
 }
 
 export async function fetchBlogPosts(): Promise<DBBlogPost[]> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) return mockBlogPosts.map(mapMockBlogPost);
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -287,7 +304,10 @@ export async function fetchBlogPosts(): Promise<DBBlogPost[]> {
 }
 
 export async function fetchProblems(): Promise<DBProblem[]> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) return mockProblems.map(mapMockProblem);
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('problems')
     .select('*')
@@ -298,7 +318,10 @@ export async function fetchProblems(): Promise<DBProblem[]> {
 }
 
 export async function fetchJobs(): Promise<DBJob[]> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) return mockJobs.map(mapMockJob);
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('jobs')
     .select('*')
@@ -309,7 +332,10 @@ export async function fetchJobs(): Promise<DBJob[]> {
 }
 
 export async function fetchNotes(): Promise<DBNote[]> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) return mockNotes.map(mapMockNote);
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('notes')
     .select('*')
@@ -320,6 +346,7 @@ export async function fetchNotes(): Promise<DBNote[]> {
 }
 
 export async function fetchSiteSettings(): Promise<DBSiteSettings | null> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) {
     return {
       id: 1,
@@ -342,6 +369,8 @@ export async function fetchSiteSettings(): Promise<DBSiteSettings | null> {
     };
   }
 
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const { data, error } = await supabase
     .from('site_settings')
     .select('*')
@@ -352,20 +381,30 @@ export async function fetchSiteSettings(): Promise<DBSiteSettings | null> {
 }
 
 export async function fetchYouTubeVideos(channel?: Channel, max?: number): Promise<YouTubeVideoItem[]> {
+<<<<<<< HEAD
   if (!isSupabaseConfigured) {
     const videos = mapMockYouTubeVideos();
     const filtered = channel ? videos.filter((video) => video.channel === channel) : videos;
     return filtered.slice(0, max ?? filtered.length);
   }
 
+=======
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
   const params = new URLSearchParams();
   if (channel) params.set('channel', channel);
   if (max) params.set('max', String(max));
 
+<<<<<<< HEAD
   const url = `${supabaseUrl}/functions/v1/youtube-feed?${params}`;
   const resp = await fetch(url, {
     headers: {
       Authorization: `Bearer ${supabaseAnonKey}`,
+=======
+  const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/youtube-feed?${params}`;
+  const resp = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+>>>>>>> 85dfe2ee233fd049f46319feb966e58683c9fde6
     },
   });
   if (!resp.ok) throw new Error(`YouTube feed failed (${resp.status})`);
